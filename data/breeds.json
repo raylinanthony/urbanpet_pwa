@@ -1,0 +1,48 @@
+{
+  "reviews": [
+    {
+      "title": "Jane Doe"
+    },
+    {
+      "title": "Justin Doe"
+    }
+  ],
+  "breeds_config": {
+    "match_sizes": {
+      "xs": "Extra-Large",
+      "l": "Large",
+      "m": "Medium"
+    },
+    "match_types": {
+      "leash": "Leash",
+      "leash_ruff": "Shock Absorbern",
+      "collar": "Collar",
+      "leash_ruff": "Shock Absorbern",
+      "obedience": "Collar",
+      "stepin": "Stepin",
+      "meshplus": "Collar",
+      "soft_walk": "Soft Walk",
+      "t_shirt": "T-Shirt",
+      "sweater": "Sweater",
+    },
+    "breeds": {
+      "animal": [
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        },
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        },
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,194 @@
+:root {
+    font-size: 10px;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.6rem;
+    background: #f0d7c5;
+}
+
+ul {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    max-width: 102.8rem;
+    margin: 2rem auto;
+    height: 57rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.trans-3 {
+    transition: all .3s ease;
+}
+.sizes-section{
+    display:none;
+}
+
+/** Breed Properties **/
+.breed-properties .wrap-details{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+.breed-properties .wrap-details .wrap-pic{
+    margin-right:5rem;
+}
+.breed-properties .wrap-details .wrap-pic .breed-icon-wrap  {width: 28rem;height: 28rem;}
+.breed-properties .wrap-details .wrap-info{
+    flex:0 1 50%;
+    display:flex;
+}
+.breed-properties .wrap-details .tb{
+    flex:0 1 50%;
+}
+.breed-properties .wrap-details .tb:first-child{
+    margin-right:2rem;
+}
+.breed-properties .wrap-details .tb li a{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  text-decoration:none;
+  padding:1rem;
+  border-bottom: 2px solid #f9f0e9;
+  color:#000;
+  text-align:left;
+}
+.breed-properties .wrap-details .tb li a:hover{
+  background:#e2c3ad;
+}
+.breed-properties .wrap-details .tb li a .size{
+    color:#005c5d;
+}
+/** Sizes Wrap **/
+.sizes-wrap {
+    position: relative;
+    text-align: center;
+}
+
+.sizes-wrap h1 {
+    font-size: 4rem;
+}
+
+.sizes-wrap .wrap-alphabet ul {
+    display: flex;
+    justify-content: center;
+}
+
+.sizes-wrap .wrap-alphabet ul li {
+    margin: 0 2px;
+}
+
+.sizes-wrap .wrap-alphabet ul li a {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50%;
+    transition: all .3s ease;
+    color: #005c5d;
+}
+
+.sizes-wrap .wrap-alphabet ul li a:hover, .sizes-wrap .wrap-alphabet ul li a.active {
+    background: #ffb71b;
+}
+
+.sizes-wrap .swiper-list {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.sizes-wrap .swiper-list .swiper-wrapper {
+    top: 4rem;
+    position: relative;
+}
+
+.sizes-wrap .swiper-container-horizontal>.swiper-scrollbar {
+    top: 0;
+    height: .8rem;
+}
+
+.sizes-wrap .swiper-container-horizontal>.swiper-scrollbar .swiper-scrollbar-drag {
+    background: #8f1637;
+}
+
+/* aside Breed*/
+aside.breed {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+aside.breed:hover .icon-wrap {
+    background: #018081;
+}
+
+.breed-icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 20rem;
+    background: #005c5d;
+    border-radius: 50%;
+    margin: 0 auto 3rem;
+}
+
+aside.breed:after {
+    content: '';
+    display: block;
+    height: 1rem;
+    width: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #454545;
+    position: absolute;
+    top: 20rem;
+}
+
+aside.breed .breed-name {
+    font-weight: bold;
+}
+
+/** Menu **/
+.wrap-menu {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.wrap-menu a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    background: #8f1637;
+    flex: 1;
+    text-align: center;
+    padding: 2.2rem 2rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    border-top: 5px solid #f0d7c5;
+}
+
+.wrap-menu a:hover, .wrap-menu a.active {
+    background: #ffb71b;
+    color: #8f1637;
+    border-top-color: #8f1637;
+}
