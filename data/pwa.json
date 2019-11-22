@@ -1,0 +1,72 @@
+{
+  "config": {
+    "currency_prefix":"RD$",
+    "dolar": "53"
+  },
+  "reviews": {
+    "smiles": {
+      "excelent": {
+        "icon": "icon-excelent",
+        "title": "Excelente",
+        "desc": "hola mundo"
+      },
+      "regular": {
+        "icon": "icon-excelent",
+        "title": "Regular",
+        "desc": "hola mundo regular"
+      },
+      "bad": {
+        "icon": "icon-excelent",
+        "title": "Bad",
+        "desc": "hola mundo bad"
+      }
+    },
+    "questions": [
+      {
+        "title": "Jane Doe"
+      },
+      {
+        "title": "Justin Doe"
+      }
+    ]
+  },
+  "breeds_config": {
+    "match_sizes": {
+      "xs": "Extra-Large",
+      "l": "Large",
+      "m": "Medium",
+      "s": "Small"
+
+    },
+    "match_types": {
+      "leash": "Leash",
+      "leash_ruff": "Shock Absorbern",
+      "collar": "Collar",
+      "obedience": "Collar",
+      "stepin": "Stepin",
+      "meshplus": "Collar",
+      "soft_walk": "Soft Walk",
+      "t_shirt": "T-Shirt",
+      "sweater": "Sweater"
+    },
+    "breeds": {
+      "animals": [
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        },
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        },
+        {
+          "type": "dog",
+          "name": "Chihuaha",
+          "img": "svg.jpg"
+        }
+      ]
+    }
+  }
+}
