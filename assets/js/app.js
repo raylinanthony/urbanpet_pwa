@@ -1,4 +1,18 @@
+/**
+@author Raylin Aquino <info@raylinaquino.com>
+@website raylinaquino.com
+@date Nov 22, 2019
+**/
+
+
+
 window._learnq = _learnq;
+
+/** Registering SW*/
+
+if(navigator.serviceWorker){
+    navigator.serviceWorker.register('./sw.js')
+}
 
 let swiper_breeds_name = '.breeds-container',
     swiper_prods_name = '.prods-container',

@@ -1,5 +1,5 @@
 // imports
-importScripts('//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js')
+//importScripts('//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js');
 
 const CACHE_VERSION = 1;
 
@@ -8,11 +8,10 @@ const DYNA_CACHE = 'cache-dyna-v'+CACHE_VERSION;
 const INMU_CACHE = 'cache-inmut-v'+CACHE_VERSION;
 
 
-const APP_FILES = {
-    '/',
-
+const APP_FILES = [
+    './',
     './assets/css/breeds.css',
-    './assets/css/normalize.css',
+    './assets/css/normalize.css', 
     './assets/css/style.css',
     './assets/css/swiper.min.css',
 
@@ -52,20 +51,19 @@ const APP_FILES = {
 
     './data/breedSizes.json',
     './data/prods.json',
-    './data/pwa.json',
+    './data/pwa.json', 
 
     './index.html',
-    './manifest.json',
-    './scandir.php',
+    './manifest.json', 
     './sw.js'
 
-}
+];
 
 self.addEventListener('install', e => {
 
     /** Creating Cache **/
      const cacheStatic = caches.open( STATIC_CACHE ).then(cache => 
-        cache.addAll( APP_SHELL ));
+        cache.addAll( APP_FILES ));
 
    /* const cacheInmutable = caches.open( INMU_CACHE ).then(cache => 
         cache.addAll( APP_SHELL_INMUTABLE ));*/
@@ -76,16 +74,23 @@ self.addEventListener('install', e => {
  
 });
 
-
 self.addEventListener('fetch', e => {
-     console.info('fetch: ',window.onLine);
+    
+  const response  = caches.match(e.request).then(res =>{
+    if(res){
+        return res;
+    }
+    console.log(e.resquest.url);
+  })  
+
+  e.respondWith(response);
 });
 
 self.addEventListener('activate', e => {
-  console.info('ACTIVATE: ',window.onLine);
+ 
 });
 
 
 self.addEventListener('sync' , e => {
-	console.info('SYNC: ',window.onLine);
+	console.info('SYNC: ',navigator.onLine);
 });
