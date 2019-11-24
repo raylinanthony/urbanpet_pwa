@@ -1,33 +1,39 @@
 {
   "config": {
     "currency_prefix":"RD$",
-    "dolar": "53"
+    "dolar": "53",
+    "api_key_klaviyo": "pk_43d89feb16e4e8743a6dfdc080891e1b4a",
+    "list_id": "LKizJP"
   },
   "reviews": {
     "smiles": {
       "excelent": {
-        "icon": "icon-excelent",
-        "title": "Excelente",
-        "desc": "hola mundo"
+        "icon": "icon-smile",
+        "title": "¡Estuvo excelente! ",
+        "desc": "Rápido, amistoso, agradable. Buen trabajo!"
       },
       "regular": {
-        "icon": "icon-excelent",
-        "title": "Regular",
-        "desc": "hola mundo regular"
+        "icon": "icon-regular",
+        "title": "Hmmm.... Regularcito",
+        "desc": "Estuvo bien, pero pudo haber sido mejor."
       },
       "bad": {
-        "icon": "icon-excelent",
-        "title": "Bad",
-        "desc": "hola mundo bad"
+        "icon": "icon-bad",
+        "title": "Nop! No me gustó",
+        "desc": "Lamentablemente, no me sentí a gusto."
       }
     },
     "questions": [
       {
-        "title": "Jane Doe"
+        "title": "Que te pareció el servicio de UrbanPet?"
       },
       {
-        "title": "Justin Doe"
+        "title": "Que opinas de la calidad de los productos"
+      },
+      {
+        "title": "Cual seria tu calificacion final?"
       }
+
     ]
   },
   "breeds_config": {

@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no">
-	<title>UrbaPet</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-</head>
-<body>
-	<main>
-		<div class="wrap-sections">
-
-			<!-- Pane one -->
-			<section id="sizes" class="sizes-wrap">
-				<div class="wrap-logo text-center">
-					<a href="#" ><img src="https://placehold.it/200x200" width="100" height="100" alt="UrbanPet Logo"></a>
-				</div>
-
-				<div class="breed-products hide">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<link rel="manifest" href="./manifest.json">
+		<link rel="icon" type="image/png" href="assets/img/icons/icon-72x72.png">
+		<title>UrbanPet</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/breeds.css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<main>
+			<div class="wrap-sections">
+				<!-- Pane one -->
+				<!-- <section id="sizes" class="sizes-wrap "> -->
+				
+				<section class="breed-products hide pane">
+					<div class="wrap-logo text-center">
+						<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
+					</div>
 					<!-- back btn -->
 					<div class="btn-back trans-3">
 						<
@@ -29,150 +31,228 @@
 						<h1 class="text-uppercase"><div class="breed-type">Collar XS</div> <div class="breed-name">Chihuaha</div></h1>
 					</div>
 					<div class="wrap-products">
-						<div class="prods-container"> 
+						<div class="prods-container">
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper">
 								
-
 							</div>
-
 						</div>
 					</div>
-
-				</div>
+				</section>
 				<!-- end  breed-properties  -->
-
-
-
-				<div class="breed-properties hide">
+				<section class="breed-properties pane hide">
+					<div class="wrap-logo text-center">
+						<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
+					</div>
 					<!-- back btn -->
 					<div class="btn-back trans-3">
 						<
 					</div>
 					<!-- end back btn -->
 					<div class="wrap-title">
-						<h1 class="text-uppercase">Medidas <span>Chihuaha</span></h1>
+						<h1 class="text-uppercase">Medidas <span></span></h1>
 					</div>
 					<div class="wrap-details">
 						<div class="wrap-pic">
 							<div class="breed-icon-wrap trans-3">
-								<img src="#" class="breed_img" width="100" alt="dog1">
+								<i class="icon_"></i>
 							</div>
 						</div>
-						<div class="wrap-info"> 
-							<ul></ul> 
-
-							<!-- end INFO  -->
-
-
-						</div>
-					</div>
-
-				</div>
-				<!-- end  breed-properties  -->
-
-
-
-
-				<div class="sizes-section">
-					<div class="wrap-title">
-						<h1 class="text-uppercase">Selecciona tu mascota</h1>
-					</div>
-					<div class="wrap-alphabet">
-						<ul>
-							<li><a href="#" class="active">A</a></li>
-							<li><a href="#">B</a></li>
-							<li><a href="#">C</a></li>
-							<li><a href="#">D</a></li>
-							<li><a href="#">E</a></li>
-							<li><a href="#">F</a></li>
-							<li><a href="#">G</a></li>
-							<li><a href="#">H</a></li>
-							<li><a href="#">I</a></li>
-							<li><a href="#">J</a></li>
-							<li><a href="#">K</a></li>
-							<li><a href="#">L</a></li>
-							<li><a href="#">M</a></li>
-							<li><a href="#">N</a></li>
-							<li><a href="#">O</a></li>
-							<li><a href="#">P</a></li>
-							<li><a href="#">Q</a></li>
-							<li><a href="#">R</a></li>
-							<li><a href="#">S</a></li>
-							<li><a href="#">T</a></li>
-							<li><a href="#">U</a></li>
-							<li><a href="#">V</a></li>
-							<li><a href="#">W</a></li>
-							<li><a href="#">X</a></li>
-							<li><a href="#">Y</a></li>
-							<li><a href="#">Z</a></li>
-						</ul>
-					</div>
-					<div class="swiper-list">
-						<div class="breeds-container">
-							<!-- If we need scrollbar -->
-							<div class="swiper-scrollbar"></div>
-							<!-- Additional required wrapper -->
-							<div class="swiper-wrapper"></div>
-
-						</div>
+						<div class="wrap-info">
+						<ul></ul>
+						<!-- end INFO  -->
 					</div>
 				</div>
-				<!-- end Sizes Section  -->
 			</section>
+			<!-- end  breed-properties  -->
+			<section class="sizes-section pane sizes-wrap" id="sizes"  >
+				<div class="wrap-logo text-center">
+					<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
+				</div>
+				<div class="wrap-title">
+					<h1 class="text-uppercase">Selecciona tu mascota</h1>
+				</div>
+				<div class="wrap-alphabet">
+					<ul>
+						<li><a href="#" class="active">A</a></li>
+						<li><a href="#">B</a></li>
+						<li><a href="#">C</a></li>
+						<li><a href="#">D</a></li>
+						<li><a href="#">E</a></li>
+						<li><a href="#">F</a></li>
+						<li><a href="#">G</a></li>
+						<li><a href="#">H</a></li>
+						<li><a href="#">I</a></li>
+						<li><a href="#">J</a></li>
+						<li><a href="#">K</a></li>
+						<li><a href="#">L</a></li>
+						<li><a href="#">M</a></li>
+						<li><a href="#">N</a></li>
+						<li><a href="#">O</a></li>
+						<li><a href="#">P</a></li>
+						<li><a href="#">Q</a></li>
+						<li><a href="#">R</a></li>
+						<li><a href="#">S</a></li>
+						<li><a href="#">T</a></li>
+						<li><a href="#">U</a></li>
+						<li><a href="#">V</a></li>
+						<li><a href="#">W</a></li>
+						<li><a href="#">X</a></li>
+						<li><a href="#">Y</a></li>
+						<li><a href="#">Z</a></li>
+					</ul>
+				</div>
+				<div class="swiper-list">
+					<div class="breeds-container">
+						<!-- If we need scrollbar -->
+						<div class="swiper-scrollbar"></div>
+						<!-- Additional required wrapper -->
+						<div class="swiper-wrapper"></div>
+					</div>
+				</div>
+			</section>
+			<!-- end Sizes Section  -->
+			<!-- </section> -->
 			<div class="floor"></div>
 			<!-- end Pane one -->
-
-
-
-			<section id="reviews" class="reviews-pane hide">
+			<!-- Reviews Section -->
+			<section id="reviews" class="reviews-pane hide pane">
 				<div class="wrap-logo text-center">
-					<a href="#" ><img src="https://placehold.it/200x200" width="100" height="100" alt="UrbanPet Logo"></a>
+					<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
 				</div>
-				<h1 class="text-uppercase">Completa la encuentras <br>Y recibe un 5% de descuento</h1>
-
+				<h1 class="text-uppercase">Completa la encuesta <br>Y recibe un 5% de descuento</h1>
 				<div class="questions">
-					<div class="counter">
-						1 de 3
+					<div class="counter"></div>
+					<div class="quiz-container">
+						<!-- Additional required wrapper -->
+						<div class="swiper-wrapper"> </div>
 					</div>
-					<div class="quest">
-						<div class="q-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, voluptatum!</div>
-						<div class="smiles">
-							<aside class="smile">
-								<i class="icon-smile"><img src="https://placehold.it/60x60" alt=""></i>
-								<div class="smile-title">Estuvo Excelente</div>
-								<div class="smile-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, officiis?</div>
-							</aside>
-							<aside class="smile">
-								<i class="icon-smile"><img src="https://placehold.it/60x60" alt=""></i>
-								<div class="smile-title">Estuvo Excelente</div>
-								<div class="smile-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, officiis?</div>
-							</aside>
-							<aside class="smile">
-								<i class="icon-smile"><img src="https://placehold.it/60x60" alt=""></i>
-								<div class="smile-title">Estuvo Excelente</div>
-								<div class="smile-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, officiis?</div>
-							</aside>
-
+					<div class="wrap-btn">
+						<a href="#newsletter-discount" class="btn-one trans-3 text-uppercase">Enviar</a>
+					</div>
+				</div>
+			</section>
+			<!-- end Reviews Section -->
+			<section id="thankyou" class="thankyou-pane hide pane">
+				<div class="info">
+					<h1 class="text-uppercase">¡Gracias <br>por registrarte!</h1>
+					<div class="desc">
+						Te enviaremos un correo donde placerat tempor nunc, fringilla mattis tortor consectetur interdum purus sit amet.
+					</div>
+					<a href="./" class="btn-one trans-3 orange text-uppercase">Ir al Inicio</a>
+				</div>
+				<div class="wrap-logo">
+					<img src="assets/img/urbanpet-animal.svg" width="300" alt="UrbanPet Animal">
+				</div>
+			</section>
+			<!-- end Reviews Section -->
+			<!-- Newsletter Section -->
+			<section id="newsletter-review" class="newsletter-pane hide pane">
+				<div class="wrap-logo text-center">
+					<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
+				</div>
+				<h1 class="text-uppercase">Forma parte de los<br><em>pet lovers</em> más cool…</h1>
+				<div class="form-wrap">
+					<form action="#" id="newsletter-form" method="post" accept-charset="utf-8">
+						<div class="form-group">
+							<input type="text" name="name" value="Pepe Chán" placeholder="Nombre completo *" required class="text-field" />
+						</div>
+						<div class="form-group">
+							<input type="email" name="email" value="raylinaquino+3@gmail.com" placeholder="Correo electrónico *" required class="text-field" />
+						</div>
+						<div class="form-group-radio">
+							<div class="radio">
+								<label><span>M</span><input value="M" type="radio" class="male" name="gender"></label>
+							</div>
+							<div class="radio">
+								<label><span>F</span><input value="F" type="radio" class="female" name="gender"></label>
+							</div>
+							<div class="wrap-send">
+								<button class="btn-one trans-3 text-uppercase">Enviar</button>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</section>
+			<!-- end Newsletter Section -->
+			
+			<!-- Newsletter Section -->
+			<section id="suscribe" class="suscribe-pane hide pane">
+				<div class="wrap-logo text-center">
+					<a href="./" ><img src="assets/img/logo.svg" width="100" height="100" alt="UrbanPet Logo"></a>
+				</div>
+				<h1 class="text-uppercase">… Que aman a su mascota</h1>
+				<form action="#"   class="suscribe-step2" method="post" accept-charset="utf-8">
+					<!-- end pet sec -->
+					<div class="pet-sec form-wrap">
+						<div class="form-group">
+							<select name="type[]" class="text-field type-breed" required>
+								<option value="">Tipo</option>
+								<option value="perro" selected>Perro</option>
+							</select>
+						</div>
+						<div class="form-group ">
+							<input type="text" name="petname[]" placeholder="Nombre mascota *"  class="text-field" name="name" required>
+						</div>
+						<div class="form-group">
+							<select name="birth[]" class="text-field" required>
+								<option value="">Mes de cumpleaños</option>
+								<option>Enero</option>
+								<option>Febrero</option>
+								<option>Marzo</option>
+								<option>Abril</option>
+								<option>Mayo</option>
+								<option>Junio</option>
+								<option>Julio</option>
+								<option>Agosto</option>
+								<option>Septiembre</option>
+								<option>Octubre</option>
+								<option>Noviembre</option>
+								<option>Diciembre</option>
+							</select>
+						</div>
+						<div class="form-group">
+						<select name="raza[]" class="text-field raza" required></select>
+					</div>
+					<!-- end row -->
+					<!-- add  -->
+					<div class="add-wrap">
+						<div class="form-group-radio">
+							<div class="wrap-checks">
+								<div class="radio">
+									<label><span>M</span><input value="M" type="radio" class="male" name="gender[0][]" checked></label>
+								</div>
+								<div class="radio">
+									<label><span>F</span><input value="F" type="radio" class="female" name="gender[0][]"></label>
+								</div>
+								<a href="javascript:;" class="add-pet "><span class="wrap-icon"><i class="icon-plus-cruz trans-3 btn-rounded"></i></span> <span class="txt">Anadir otra<br> mascota</span></a>
+							</div>
+							<div class="wrap-btn">
+								<button type="submit" class="btn-one red trans-3 active">Enviar</button>
+								<i class="icon-less btn-rounded trans-3 remove hide" title="Eliminar"></i>
+							</div>
 						</div>
 					</div>
+					<!-- end add -->
 				</div>
-
-			</section>
-
-
-
-		</div>
-		<!-- Options Menu -->
-		<div class="wrap-menu">
-			<a href="#sizes"   class="trans-3 text-uppercase active">Size Chart</a>
-			<a href="#reviews" data-closes="" class="trans-3 text-uppercase">Danos tu opinión</a>
-			<a href="#suscribe" data-closes="" class="trans-3 text-uppercase">Suscríbete</a>
-		</div>
-		<!-- end Options Menu -->
-	</main>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/swiper.min.js"></script>
-	<script src="assets/js/app.js"></script>
+				<!-- end pet sec -->
+			</form>
+		</section>
+		<!-- end Newsletter Section -->
+	</div>
+	<!-- Options Menu -->
+	<div class="wrap-menu">
+		<a href="#sizes"   class="trans-3 text-uppercase active">Size Chart</a>
+		<a href="#reviews"   class="trans-3 text-uppercase">Danos tu opinión</a>
+		<a href="#suscribe"   class="trans-3 text-uppercase">Suscríbete</a>
+	</div>
+	<!-- end Options Menu -->
+</main>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/swiper.min.js"></script>
+<script src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=PBFhLu"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/reviews.js"></script>
 </body>
 </html>

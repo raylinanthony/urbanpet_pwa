@@ -3,15 +3,113 @@
     height: 100%;
 }
 
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
-      line-height:1.2;
+    font-weight: 400;
+    line-height: 1.2;
     background: #f0d7c5;
-    color:#1a1817;
+    color: #212121;
     margin: 0;
     height: 100%;
     padding: 0;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon/icomoon.eot?4hxjrq');
+    src: url('../fonts/icomoon/icomoon.eot?4hxjrq#iefix') format('embedded-opentype'), url('../fonts/icomoon/icomoon.ttf?4hxjrq') format('truetype'), url('../fonts/icomoon/icomoon.woff?4hxjrq') format('woff'), url('../fonts/icomoon/icomoon.svg?4hxjrq#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block; }
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-less:before {
+    content: "\e900";
+}
+
+.icon-plus-cruz:before {
+    content: "\e901";
+}
+
+.icon-arrow_right:before {
+    content: "\e902";
+}
+
+.icon-arrow_left:before {
+    content: "\e903";
+}
+
+.icon-regular:before {
+    content: "\e904";
+}
+
+.icon-smile:before {
+    content: "\e905";
+}
+
+.icon-bad:before {
+    content: "\e906";
+}
+.btn-rounded{
+        width: 4.5rem;
+    height: 4.5rem;
+    display: inline-flex;
+    background: #ffb71b;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 2rem;
+    border:0;
+}
+.btn-rounded:hover{
+  color: white;
+    background: #8f1637;
+}
+.btn-one {
+    padding: 1.5rem 6rem;
+    display: inline-block;
+    background: #8f1637;
+    color: #fff;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn-one:hover {
+    background: #c2204c;
+}
+
+.btn-one.orange {
+    background: #ffb71b;
+    color: #004d4d;
+}
+
+.btn-one.orange:hover {
+    background: #ffcb5a;
 }
 
 ul {
@@ -22,7 +120,7 @@ ul {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 main {
@@ -58,6 +156,9 @@ main {
 .wrap-sections {
     flex: 1;
     padding-top: 2rem;
+    height: 80%;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .btn-back {
@@ -83,6 +184,9 @@ main {
 }
 
 /** Breed Products **/
+.breed-products {
+    text-align:center
+}
 .breed-products .wrap-products {
     background: #fff;
     position: absolute;
@@ -91,18 +195,24 @@ main {
     left: 0;
     padding: 7rem 0 7rem;
 }
-.breed-products .wrap-products .swiper-slide h4{
-    margin:0 0 1rem;
+
+.breed-products .wrap-products .swiper-slide h4 {
+    margin: 0 0 1rem;
 }
-.breed-products .wrap-products .swiper-slide .price{
-    font-weight:bold;
-    color:#005c5d;
+
+.breed-products .wrap-products .swiper-slide .price {
+    font-weight: bold;
+    color: #005c5d;
 }
+
 .breed-products h1 .breed-name {
     color: #005c5d;
 }
 
 /** Breed Properties **/
+.breed-properties {
+    text-align:center
+}
 .breed-properties .wrap-details {
     display: flex;
     justify-content: center;
@@ -116,6 +226,11 @@ main {
 .breed-properties .wrap-details .wrap-pic .breed-icon-wrap {
     width: 28rem;
     height: 28rem;
+}
+
+.breed-properties .wrap-details .wrap-pic .breed-icon-wrap i {
+    color: #ffb71b;
+    font-size: 10rem;
 }
 
 .breed-properties .wrap-details .wrap-info {
@@ -160,7 +275,7 @@ main {
 
 h1 {
     font-size: 4.2rem;
-    font-weight: 900;
+    font-weight: 800;
     margin: 2rem 0;
     line-height: 1;
 }
@@ -232,6 +347,11 @@ aside.breed:hover .breed-icon-wrap {
     margin: 0 auto 3rem;
 }
 
+.breed-icon-wrap i {
+    font-size: 8rem;
+    color: #f0d7c5;
+}
+
 aside.breed:after {
     content: '';
     display: block;
@@ -253,38 +373,249 @@ aside.breed .breed-name {
     font-size: 1.5rem;
 }
 
-/* Reviews Pane */
-.reviews-pane{
-    text-align:center;
+/** Thankyou Pane **/
+.thankyou-pane {
+    background: url(../img/bg-green.jpg) center top #005c5d;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8rem;
+    height: 100%;
 }
-.reviews-pane .counter{
-    font-size:2rem;
-    color:#005c5d;
-    font-weight:bold;
 
+.thankyou-pane h1 {
+    font-size: 5rem;
+    font-weight: 700;
 }
-.reviews-pane .questions .q-title{
-    margin:2rem auto;
-    font-size:2rem;
-        max-width:70%;
+
+.thankyou-pane .info {
+    padding-right: 5rem;
 }
-.reviews-pane .smiles{
-    display:flex;
-    max-width:70%;
-    margin:0  auto;
+
+.thankyou-pane .info .desc {
+    margin-bottom: 2rem;
+    font-weight: 500;
+    font-size: 2.2rem;
+    line-height: 1.4;
 }
-.reviews-pane .smiles .smile{
-    margin:0  2rem;
+
+/* Fieldsc **/
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.text-field {
+    padding: 0 2rem;
+    height: 6rem;
+    border: 0;
+    width: 100%;
+    font-size: 1.4rem;
+    display: block;
+}
+
+.text-field:focus {
+    outline-color: #005d5c;
+}
+
+/** Newsletter Pane **/
+.newsletter-pane {
+    text-align: center;
+}
+
+.newsletter-pane h1 {
+    font-size: 5rem;
+}
+
+.newsletter-pane .form-wrap {
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+/** Suscribe Pane **/
+.suscribe-pane {
+    text-align: center;
+}
+
+.suscribe-pane h1 {
+    font-size: 5rem;
+}
+
+.suscribe-pane .form-wrap {
+    max-width: 60rem;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.suscribe-pane .form-group-radio .radio label{
+   width:4.5rem;
+}
+.suscribe-pane .form-wrap .form-group {
+    flex: 1 45%;
+    margin: 1rem 2%;
+}
+
+.suscribe-pane .add-pet {
+    display: flex;
+    color: #212121;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-decoration: none;
+    text-align: left;
+    align-items: center;
+}
+
+.suscribe-pane .add-pet i {
+   
+    margin-right: 2rem;
+}
+
+.suscribe-pane .form-group-radio .radio {
+    margin-right: 2rem;
+}
+
+ .suscribe-pane .add-pet:hover i {
+    color: white;
+    background: #8f1637;
+}
+.suscribe-pane .wrap-checks{
+       flex: 1 45%;
+       margin:0 1rem;
+       display: flex;
+       align-items: center;
+}
+.suscribe-pane .wrap-btn {
+    flex: 1 45%;
+    width: 50%;
+    margin: 0 1rem;
+}
+
+.suscribe-pane .wrap-btn button.btn-one {
+    display: block;
+    width:100%;
+}
+
+.suscribe-pane .add-wrap {
+    width: 100%;
+}
+
+/* Reviews Pane */
+.reviews-pane {
+    text-align: center;
+}
+
+.reviews-pane .wrap-btn {
+    margin-top: 2rem;
+    display: none;
+}
+
+.reviews-pane .counter {
+    font-size: 2rem;
+    color: #005c5d;
+    font-weight: bold;
+}
+
+.reviews-pane .questions .q-title {
+    margin: 2rem auto;
+    font-size: 2.6rem;
+    font-weight: bold;
+    max-width: 70%;
+}
+
+.form-group-radio {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group-radio .radio {
+    position: relative;
+    display: inline-block;
+}
+
+.form-group-radio .radio label {
+    position: relative;
+    display: inline-block;
+    width: 4rem;
     cursor: pointer;
 }
-.reviews-pane .smiles .smile-title{
-    color:#005c5d;
-    font-weight:bold;
-    margin:1rem 0;
+
+.form-group-radio .radio label span {
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.reviews-pane .smiles  .smile-desc{
-    font-size:1.2rem;
-    line-height:1.2;
+
+.form-group-radio .radio input[type='radio'] {
+    margin-right: 2rem;
+    -webkit-appearance: none;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: white;
+    display: block;
+    outline: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.form-group-radio .radio input[type='radio']:checked {
+    box-shadow: inset 0 0 0px 4px #000000;
+}
+
+.form-group-radio .radio input[type='radio']:hover {
+    box-shadow: inset 0 0 0px 4px rgba(0, 0, 0, 0.37);
+}
+
+.reviews-pane .smiles {
+    display: flex;
+    max-width: 70%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.reviews-pane .smiles .smile i {
+    color: #212121;
+    font-size: 6rem;
+    position: relative;
+    display: inline-block;
+}
+
+.reviews-pane .smiles .smile i:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.reviews-pane .smiles .smile i:hover:after, .reviews-pane .smiles .smile.active i:after {
+    background: #ffb71b;
+}
+
+.reviews-pane .smiles .smile {
+    margin: 0 2rem;
+    cursor: pointer;
+}
+
+.reviews-pane .smiles .smile-title {
+    color: #005c5d;
+    font-weight: bold;
+    margin: 1rem 0 .2rem;
+}
+
+.reviews-pane .smiles .smile-desc {
+    font-size: 1.4rem;
+    line-height: 1.2;
 }
 
 /** Menu **/
