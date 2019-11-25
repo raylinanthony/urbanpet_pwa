@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'UrbanPet';
-  src:  url('../fonts/breeds/UrbanPet.eot?42t1n7');
-  src:  url('../fonts/breeds/UrbanPet.eot?42t1n7#iefix') format('embedded-opentype'),
-    url('../fonts/breeds/UrbanPet.ttf?42t1n7') format('truetype'),
-    url('../fonts/breeds/UrbanPet.woff?42t1n7') format('woff'),
-    url('../fonts/breeds/UrbanPet.svg?42t1n7#UrbanPet') format('svg');
+  src:  url('../fonts/breeds/UrbanPet.eot');
+  src:  url('../fonts/breeds/UrbanPet.eot') format('embedded-opentype'),
+    url('../fonts/breeds/UrbanPet.ttf') format('truetype'),
+    url('../fonts/breeds/UrbanPet.woff') format('woff'),
+    url('../fonts/breeds/UrbanPet.svg') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
-		<link rel="manifest" href="./manifest.json">
+		<link rel="manifest" href="manifest.json">
+		<meta name="disable-extension-feature" content="read-dom" />
 		<link rel="icon" type="image/png" href="assets/img/icons/icon-72x72.png">
 		<title>UrbanPet</title>
 		<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
@@ -14,6 +15,7 @@
 	</head>
 	<body>
 		<main>
+ 
 			<div class="wrap-sections">
 				<!-- Pane one -->
 				<!-- <section id="sizes" class="sizes-wrap "> -->
@@ -241,6 +243,7 @@
 		</section>
 		<!-- end Newsletter Section -->
 	</div>
+
 	<!-- Options Menu -->
 	<div class="wrap-menu">
 		<a href="#sizes"   class="trans-3 text-uppercase active">Size Chart</a>
@@ -249,10 +252,11 @@
 	</div>
 	<!-- end Options Menu -->
 </main>
-<script src="sw.js"></script>
+
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/swiper.min.js"></script>
-<script src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=PBFhLu"></script>
+<script src="//cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js"></script>
+<!-- <script src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=PBFhLu"></script> -->
 <script src="assets/js/app.js"></script>
 <script src="assets/js/reviews.js"></script>
 

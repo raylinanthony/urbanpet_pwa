@@ -6,12 +6,12 @@
 
 
 
-window._learnq = _learnq;
+///window._learnq = _learnq;
 
 /** Registering SW*/
 
 if(navigator.serviceWorker){
-    navigator.serviceWorker.register('./sw.js')
+    navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
 }
 
 let swiper_breeds_name = '.breeds-container',
@@ -161,7 +161,8 @@ const getProdsByParams = (type, size, data) => {
     return new Promise((resolve, reject) => {
 
         let products_data = [],
-            liProd = '';
+            liProd = '',
+            count = 0;
 
         Object.entries(data.products).map(val => {
 
@@ -173,7 +174,7 @@ const getProdsByParams = (type, size, data) => {
                 due that... I must double-check if exists variant. */
 
                 if (val[1].hasOwnProperty('variants')) {
-
+              
                     val[1].variants.forEach((item) => {
 
                         if (item.title == size && item.available === true) {
@@ -203,12 +204,13 @@ const getProdsByParams = (type, size, data) => {
                                 </div>
 
                                 `;
-
+                         
                         }
 
                     }); //end Variant
 
                 }
+        
 
             }
         }); //end entries
