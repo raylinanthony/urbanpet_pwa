@@ -10,8 +10,8 @@
 
 /** Registering SW*/
 
-if(navigator.serviceWorker){
-    navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
+if (navigator.serviceWorker) {
+    //navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
 }
 
 let swiper_breeds_name = '.breeds-container',
@@ -34,9 +34,295 @@ let swiper_breeds_name = '.breeds-container',
 
 /** JSON FILES **/
 const breedSizesJSON = 'data/breedSizes.json',
-
+    pwaConfig = loadJSON('data/pwa.json'),
     //prodsShopify = 'http://urbanpet.do/p-roducts.json?limit=999';
     prodsShopify = 'data/prods.json';
+
+
+
+const getProdsByParams = (type, size, breed, data) => {
+
+    $('h1 .breed-type').text(type+' '+size);
+    $('.breed-products h1 .breed-name').text(breed);
+     
+    return new Promise((resolve, reject) => {
+
+        let products_data = [],
+            liProd = '',
+            count = 0;
+
+        Object.entries(data.products).map(val => {
+
+            /** First I ask for the type */
+
+            if (val[1].title.includes(type)) {
+
+                /** Some products doesn't have variants 
+                due that... I must double-check if exists variant. */
+
+                if (val[1].hasOwnProperty('variants')) {
+
+                    val[1].variants.forEach((item) => {
+
+                        if (item.title == size && item.available === true) {
+
+                            /*products_data.push({
+                                title: val[1].title,
+                                size: item.title,
+                                price: calculatePrice(item.price),
+                                image: (item.featured_image != null) ? item.featured_image.src : '',
+                            });*/
+
+                            if (null === item.featured_image) return; //Only show if products have images.
+
+                            const img = item.featured_image.src;
+
+                            liProd += `
+                            <div class="swiper-slide">
+                            <aside class="breed-prod">
+                            <div class="img">
+                            <img src="${img}" height="120" />
+                            </div>
+                            <h4 class="title">
+                            ${val[1].title}
+                            </h4>
+                            <div class="price">
+                            RD$ ${calculatePrice(item.price)}
+                            </div>
+                            </aside>
+                            </div>
+
+                            `;
+
+                        }
+
+                    }); //end Variant
+
+                }
+
+
+            }
+        }); //end entries
+
+
+        $(swiper_prods_name + ' .swiper-wrapper').html(liProd)
+        if (products_data) {
+            return resolve(true);
+        }
+        return reject('no data');
+    });
+
+}
+
+
+/**
+ * Change the letter in alphabet depends on the current slide.
+ *
+ **/
+
+const alphabetChange = (word) => {
+
+    $(alphabetLetters).removeClass(activeClass);
+
+    $(alphabetLetters).each(function() {
+
+        if ($(this).text().toLowerCase().trim() == word[0].toLowerCase().trim()) {
+
+            $(this).addClass(activeClass);
+
+            return false;
+
+        }
+    })
+};
+
+const showHideSection = (secToShow, secToHide) => {
+    /*
+
+        secToHide.forEach(function(element, index) {
+            $(element).removeClass(_showCls).addClass(_hideCls);
+        });*/
+    $('.pane').removeClass(_showCls).addClass(_hideCls);
+
+    $(secToShow).removeClass(_hideCls).addClass(_showCls);
+
+}
+
+/**
+ * Setting the swiper effect for all breeds
+ *
+ **/
+const swiperProds = () => {
+
+    return new Promise((resolve, reject) => {
+        prodsSwiper = new Swiper(swiper_prods_name, {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            speed: 6000,
+            freeModeMomentumRatio: 1,
+            freeMode: true,
+            freeModeFluid: true,
+            observer: true,
+            observeParents: true,
+        });
+    }); //end promise
+}
+
+/**
+ * Setting the swiper effect for all breeds
+ *
+ **/
+const swiperBreeds = () => {
+
+    return new Promise((resolve, reject) => {
+        sizeSwiper = new Swiper(swiper_breeds_name, {
+
+            spaceBetween: 10,
+            slidesPerView: 4,
+            speed: 6000,
+            scrollbar: {
+                el: swiper_breeds_scrollbar,
+                //draggable: true,
+            },
+            freeModeMomentumRatio: 1,
+            freeMode: true,
+            freeModeFluidloadProds: true,
+            on: {
+                slideChangeTransitionEnd: function() {
+
+                    alphabetChange($('.swiper-slide-active').find('.breed-name').html())
+
+                },
+            }
+        });
+    }); //end promise
+}
+
+/* Get the Breed slug match*/
+const getMatchBreeds = (breedslug, breedsize) => {
+
+    return pwaConfig.then(data => {
+
+        let _matchName = data.breeds_config.match_types[breedslug],
+            _matchSize = data.breeds_config.match_sizes[breedsize];
+        
+
+        if (_matchName != undefined){
+
+        } return [_matchName, _matchSize];
+
+    });
+};
+
+
+const getBreedData = (_breed) => {
+
+    return new Promise((resolve, reject) => {
+
+        let data_breeds = '';
+
+        Object.entries(JSON.parse(_breed.sizes)).map((size) => {
+
+            var _sizeData = getMatchBreeds(size[0], size[1][1]);
+
+
+            _sizeData.then(val => {
+
+                if (val[0] == undefined) return;
+
+                data_breeds += `
+                    <li>
+                        <a href="#" data-breed="${_breed.name}" data-type="${val[0]}" data-size="${val[1]}"  class="trans-3" >
+                            <div class="txt">${val[0]}</div> <span class="size text-uppercase">${size[1][1]}</span>
+                        </a>
+                    </li>
+                `;
+            });
+
+        });
+
+        setTimeout(() => {
+             
+            $(_breedPropsSection + ' .breed-icon-wrap i').attr('class', _breed.icon);
+            $(_breedPropsSection + ' h1 span').text(_breed.name);
+            $(_breedPropsSection + ' .wrap-info ul').html(data_breeds);
+
+        }, 1);
+
+        resolve();
+
+
+    });
+}
+
+const calculatePrice = price => {
+    return (Math.floor(price) * Math.floor(53)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+};
+
+
+/** Load Prods JSON **/
+
+function loadJSON(json) {
+
+    return fetch(json).then(data => data.json());
+}
+
+
+
+/** Load Breed JSON **/
+
+const loadBreeds = () => {
+
+    let breed_list = '';
+
+    return fetch(breedSizesJSON)
+        .then(data => data.json())
+        .then(breeds => {
+
+
+            return new Promise((resolve, reject) => {
+
+                Object.entries(breeds).map(val => {
+
+                    const sizes = {
+                        leash: val[1].leash,
+                        collar: val[1].collar,
+                        leash_ruff: val[1].leash_ruff,
+                        stepin: val[1].stepin,
+                        meshplus: val[1].meshplus,
+                    };
+
+
+                    breed_list += `
+                <div class="swiper-slide">
+                <aside class="breed trans-3" data-breed="${val[0]}">
+                <div class="breed-icon-wrap trans-3">
+                <i class="icon_${val[1].fullName}"></i>
+                </div>
+                <div class="breed-name text-uppercase">${val[0]}</div>
+                <div class="data-sizes hide">${JSON.stringify(sizes)}</div>
+                </aside>
+                </div>  
+                `;
+                });
+
+                $(swiper_breeds_wrapper).html(breed_list);
+
+                resolve();
+
+            }); //end promise
+
+
+        }).catch(console.log)
+}
+
+
+
+
+loadBreeds().then(() => swiperBreeds());
+
+
+
 
 $(function() {
 
@@ -115,12 +401,18 @@ $(function() {
     $(document).on('click', '.breed-properties .wrap-details .wrap-info ul li a', function(e) {
 
         e.preventDefault();
+
+        var _currentType = $(this).attr('data-type'),
+            _currentSize = $(this).attr('data-size'),
+            _currentName = $(this).attr('data-breed') 
+
+             ;
+
         showHideSection(_breedProdsSection, [_breedPropsSection]);
 
+        loadJSON(prodsShopify).then(data => {
 
-        loadProds().then(data => {
-
-            getProdsByParams('Collars & Harnesses', "Small", data).then(res => {
+            getProdsByParams(_currentType, _currentSize,_currentName, data).then(res => {
 
                 swiperProds();
             });
@@ -152,259 +444,3 @@ $(function() {
 
 
 })
-
-
-
-
-const getProdsByParams = (type, size, data) => {
-
-    return new Promise((resolve, reject) => {
-
-        let products_data = [],
-            liProd = '',
-            count = 0;
-
-        Object.entries(data.products).map(val => {
-
-            /** First I ask for the type */
-
-            if (val[1].product_type == type) {
-
-                /** Some products doesn't have variants	
-                due that... I must double-check if exists variant. */
-
-                if (val[1].hasOwnProperty('variants')) {
-              
-                    val[1].variants.forEach((item) => {
-
-                        if (item.title == size && item.available === true) {
-
-                            /*products_data.push({
-                                title: val[1].title,
-                                size: item.title,
-                                price: calculatePrice(item.price),
-                                image: (item.featured_image != null) ? item.featured_image.src : '',
-                            });*/
-
-                            const img = (item.featured_image != null) ? item.featured_image.src : '';
-
-                            liProd += `
-                                <div class="swiper-slide">
-                                <aside class="breed-prod">
-                                <div class="img">
-                                <img src="${img}" height="120" />
-                                </div>
-                                <h4 class="title">
-                                ${val[1].title}
-                                </h4>
-                                <div class="price">
-                                RD$ ${calculatePrice(item.price)}
-                                </div>
-                                </aside>
-                                </div>
-
-                                `;
-                         
-                        }
-
-                    }); //end Variant
-
-                }
-        
-
-            }
-        }); //end entries
-
-
-        $(swiper_prods_name + ' .swiper-wrapper').html(liProd)
-        if (products_data) {
-            return resolve(true);
-        }
-        return reject('no data');
-    });
-
-}
-
-
-/**
- * Change the letter in alphabet depends on the current slide.
- *
- **/
-
-const alphabetChange = (word) => {
-
-    $(alphabetLetters).removeClass(activeClass);
-
-    $(alphabetLetters).each(function() {
-
-        if ($(this).text().toLowerCase().trim() == word[0].toLowerCase().trim()) {
-
-            $(this).addClass(activeClass);
-
-            return false;
-
-        }
-    })
-};
-
-const showHideSection = (secToShow, secToHide) => {
-/*
-
-    secToHide.forEach(function(element, index) {
-        $(element).removeClass(_showCls).addClass(_hideCls);
-    });*/
-  $('.pane').removeClass(_showCls).addClass(_hideCls);
-
-    $(secToShow).removeClass(_hideCls).addClass(_showCls);
-
-}
-
-/**
- * Setting the swiper effect for all breeds
- *
- **/
-const swiperProds = () => {
-
-    return new Promise((resolve, reject) => {
-        prodsSwiper = new Swiper(swiper_prods_name, {
-            spaceBetween: 10,
-            slidesPerView: 4,
-            speed: 6000,
-            freeModeMomentumRatio: 1,
-            freeMode: true,
-            freeModeFluid: true,
-            observer: true,
-            observeParents: true,
-        });
-    }); //end promise
-}
-
-/**
- * Setting the swiper effect for all breeds
- *
- **/
-const swiperBreeds = () => {
-
-    return new Promise((resolve, reject) => {
-        sizeSwiper = new Swiper(swiper_breeds_name, {
-
-            spaceBetween: 10,
-            slidesPerView: 4,
-            speed: 6000,
-            scrollbar: {
-                el: swiper_breeds_scrollbar,
-                //draggable: true,
-            },
-            freeModeMomentumRatio: 1,
-            freeMode: true,
-            freeModeFluid: true,
-            on: {
-                slideChangeTransitionEnd: function() {
-
-                    alphabetChange($('.swiper-slide-active').find('.breed-name').html())
-
-                },
-            }
-        });
-    }); //end promise
-}
-
-
-const getBreedData = (_breed) => {
-
-    return new Promise((resolve, reject) => {
-
-        let data_breeds = '';
-
-        $(_breedPropsSection + ' .breed-icon-wrap i').attr('class', _breed.icon);
-        $(_breedPropsSection + ' h1 span').text(_breed.name);
-
-        Object.entries(JSON.parse(_breed.sizes)).map((size) => {
-
-            data_breeds += `
-                <li>
-                <a href="#"  class="trans-3" >
-                <div class="txt">${size[0]}</div> <span class="size text-uppercase">${size[1][1]}</span>
-                </a>
-                </li>
-                `;
-
-        });
-
-        $(_breedPropsSection + ' .wrap-info ul').html(data_breeds)
-
-
-        resolve();
-
-    });
-}
-
-const calculatePrice = price => {
-    return (Math.floor(price) * Math.floor(53)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-};
-
-
-/** Load Prods JSON **/
-
-const loadProds = () => {
-
-    return fetch(prodsShopify).then(data => data.json());
-}
-
-
-
-/** Load Breed JSON **/
-
-const loadBreeds = () => {
-
-    let breed_list = '';
-
-    return fetch(breedSizesJSON)
-        .then(data => data.json())
-        .then(breeds => {
-
-
-            return new Promise((resolve, reject) => {
-
-                Object.entries(breeds).map(val => {
-
-                    const sizes = {
-                        leash: val[1].leash,
-                        collar: val[1].collar,
-                        leash_ruff: val[1].leash_ruff,
-                        obedience: val[1].obedience,
-                        stepin: val[1].stepin,
-                        meshplus: val[1].meshplus,
-                        soft_walk: val[1].soft_walk,
-                        t_shirt: val[1].t_shirt,
-                        sweater: val[1].sweater
-                    };
-
-
-                    breed_list += `
-                    <div class="swiper-slide">
-                    <aside class="breed trans-3" data-breed="${val[0]}">
-                    <div class="breed-icon-wrap trans-3">
-                    <i class="icon_${val[1].fullName}"></i>
-                    </div>
-                    <div class="breed-name text-uppercase">${val[0]}</div>
-                    <div class="data-sizes hide">${JSON.stringify(sizes)}</div>
-                    </aside>
-                    </div>  
-                    `;
-                });
-
-                $(swiper_breeds_wrapper).html(breed_list);
-
-                resolve();
-
-            }); //end promise
-
-
-        }).catch(console.log)
-}
-
-
-
-
-loadBreeds().then(() => swiperBreeds());

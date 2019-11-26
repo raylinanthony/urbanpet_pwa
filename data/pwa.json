@@ -41,19 +41,16 @@
       "xs": "Extra-Large",
       "l": "Large",
       "m": "Medium",
-      "s": "Small"
+      "s": "Small",
+      "-":"-"
 
     },
     "match_types": {
-      "leash": "Leash",
-      "leash_ruff": "Shock Absorbern",
-      "collar": "Collar",
-      "obedience": "Collar",
-      "stepin": "Stepin",
-      "meshplus": "Collar",
-      "soft_walk": "Soft Walk",
-      "t_shirt": "T-Shirt",
-      "sweater": "Sweater"
+       "leash": "Correa",
+      "leash_ruff": "Ruff Leash",
+      "collar": "Collar", 
+      "stepin": "Arnés",
+      "meshplus": "Mesh Plus" 
     },
     "breeds": {
       "animals": [

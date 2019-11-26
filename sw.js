@@ -20,10 +20,10 @@ const APP_FILES = [
     './assets/css/style.css',
     './assets/css/swiper.min.css',
 
-    './assets/fonts/breeds/UrbanPet.eot?42t1n7',
-    './assets/fonts/breeds/UrbanPet.svg?42t1n7',
-    './assets/fonts/breeds/UrbanPet.ttf?42t1n7',
-    './assets/fonts/breeds/UrbanPet.woff?42t1n7',
+    './assets/fonts/breeds/UrbanPet.eot?jpc6s0',
+    './assets/fonts/breeds/UrbanPet.svg?jpc6s0',
+    './assets/fonts/breeds/UrbanPet.ttf?jpc6s0',
+    './assets/fonts/breeds/UrbanPet.woff?jpc6s0',
 
     './assets/fonts/icomoon/icomoon.eot?4hxjrq',
     './assets/fonts/icomoon/icomoon.svg?4hxjrq',
@@ -86,14 +86,7 @@ self.addEventListener('install', e => {
             return cache.addAll(APP_INMU)
         }
     );
-
-
-
-
-    /* const cacheInmutable = caches.open( INMU_CACHE ).then(cache => 
-         cache.addAll( APP_SHELL_INMUTABLE ));*/
-
-
+ 
 
     e.waitUntil(Promise.all([cacheStatic, cacheInmu]));
 
@@ -122,7 +115,7 @@ self.addEventListener('fetch', e => {
 
     e.respondWith(response);
 });
-/*
+
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
@@ -135,7 +128,7 @@ self.addEventListener('activate', function(event) {
       );
     })
   );
-});*/
+});
 
 
 self.addEventListener('sync', e => {

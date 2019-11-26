@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'UrbanPet';
-  src:  url('../fonts/breeds/UrbanPet.eot');
-  src:  url('../fonts/breeds/UrbanPet.eot') format('embedded-opentype'),
-    url('../fonts/breeds/UrbanPet.ttf') format('truetype'),
-    url('../fonts/breeds/UrbanPet.woff') format('woff'),
-    url('../fonts/breeds/UrbanPet.svg') format('svg');
+  font-family: 'urbanPet';
+  src:  url('../fonts/breeds/urbanPet.eot?jpc6s0');
+  src:  url('../fonts/breeds/urbanPet.eot?jpc6s0#iefix') format('embedded-opentype'),
+    url('../fonts/breeds/urbanPet.ttf?jpc6s0') format('truetype'),
+    url('../fonts/breeds/urbanPet.woff?jpc6s0') format('woff'),
+    url('../fonts/breeds/urbanPet.svg?jpc6s0#urbanPet') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
 
 [class^="icon_"], [class*=" icon_"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'UrbanPet' !important;
+  font-family: 'urbanPet' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -25,237 +25,252 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon_akita:before {
+.icon_terra_nova:before {
+  content: "\e952";
+}
+.icon_affenpinscher:before {
   content: "\e900";
 }
-.icon_american_staffordshire_terrier:before {
+.icon_akita:before {
   content: "\e901";
 }
-.icon_australian_shepherd:before {
+.icon_american_staffordshire_terrier:before {
   content: "\e902";
 }
-.icon_basenji:before {
+.icon_australian_shepherd:before {
   content: "\e903";
 }
-.icon_basset_hound:before {
+.icon_basenji:before {
   content: "\e904";
 }
-.icon_beagle:before {
+.icon_basset_hound:before {
   content: "\e905";
 }
-.icon_bernese_mountain_dog:before {
+.icon_beagle:before {
   content: "\e906";
 }
-.icon_bichon_frise:before {
+.icon_bernese_mountain_dog:before {
   content: "\e907";
 }
-.icon_bichon_havanes:before {
+.icon_bichon_frise:before {
   content: "\e908";
 }
-.icon_border_collie:before {
+.icon_bichon_havanes:before {
   content: "\e909";
 }
-.icon_boston_terrier:before {
+.icon_border_collie:before {
   content: "\e90a";
 }
-.icon_boxer:before {
+.icon_boston_terrier:before {
   content: "\e90b";
 }
-.icon_bull_terrier:before {
+.icon_boxer:before {
   content: "\e90c";
 }
-.icon_bulldog_frances:before {
+.icon_bull_terrier:before {
   content: "\e90d";
 }
-.icon_bulldog_ingles:before {
+.icon_bulldog_frances:before {
   content: "\e90e";
 }
-.icon_cane_corso_italiano:before {
+.icon_bulldog_ingles:before {
   content: "\e90f";
 }
-.icon_cavalier_king_charles:before {
+.icon_cane_corso_italiano:before {
   content: "\e910";
 }
-.icon_chihuahua:before {
+.icon_cavalier_king_charles:before {
   content: "\e911";
 }
-.icon_chow_chow:before {
+.icon_chihuahua:before {
   content: "\e912";
 }
-.icon_cocker_spaniel:before {
+.icon_chow_chow:before {
   content: "\e913";
 }
-.icon_collie:before {
+.icon_cocker_spaniel:before {
   content: "\e914";
 }
-.icon_corgi:before {
+.icon_collie:before {
   content: "\e915";
 }
-.icon_coton_de_tulear:before {
+.icon_corgi:before {
   content: "\e916";
 }
-.icon_dachshund:before {
+.icon_coton_de_tulear:before {
   content: "\e917";
 }
-.icon_dalmata:before {
+.icon_dachshund:before {
   content: "\e918";
 }
-.icon_doberman:before {
+.icon_dalmata:before {
   content: "\e919";
 }
-.icon_dogo_argentino:before {
+.icon_doberman:before {
   content: "\e91a";
 }
-.icon_dogue_alemao:before {
+.icon_dogo_argentino:before {
   content: "\e91b";
 }
-.icon_fox_terrier:before {
+.icon_dogue_alemao:before {
   content: "\e91c";
 }
-.icon_foxhound:before {
+.icon_fox_terrier:before {
   content: "\e91d";
 }
-.icon_galgo:before {
+.icon_foxhound:before {
   content: "\e91e";
 }
-.icon_golden_retriever:before {
+.icon_galgo:before {
   content: "\e91f";
 }
-.icon_griffon_bruxelas:before {
+.icon_golden_retriever:before {
   content: "\e920";
 }
-.icon_husky_siberiano:before {
+.icon_griffon_bruxelas:before {
   content: "\e921";
 }
-.icon_jack_russel:before {
+.icon_husky_siberiano:before {
   content: "\e922";
 }
-.icon_kuvasz:before {
+.icon_jack_russel:before {
   content: "\e923";
 }
-.icon_labrador_retriever:before {
+.icon_kuvasz:before {
   content: "\e924";
 }
-.icon_leao_da_rodesia:before {
+.icon_labrador_retriever:before {
   content: "\e925";
 }
-.icon_lhasa_apso:before {
+.icon_leao_da_rodesia:before {
   content: "\e926";
 }
-.icon_malamute_do_alasca:before {
+.icon_lhasa_apso:before {
   content: "\e927";
 }
-.icon_maltes:before {
+.icon_lulu_da_pomerania:before {
   content: "\e928";
 }
-.icon_new-zealand-huntaway:before {
+.icon_malamute_do_alasca:before {
   content: "\e929";
 }
-.icon_newfoundland:before {
+.icon_maltes:before {
   content: "\e92a";
 }
-.icon_norfolk_terrier:before {
+.icon_new-zealand-huntaway:before {
   content: "\e92b";
 }
-.icon_nova_scotia_DTR:before {
+.icon_newfoundland:before {
   content: "\e92c";
 }
-.icon_pastor_alemao:before {
+.icon_norfolk_terrier:before {
   content: "\e92d";
 }
-.icon_pastor_belga:before {
+.icon_nova_scotia_DTR:before {
   content: "\e92e";
 }
-.icon_pastor_boiadeiro:before {
+.icon_pastor_alemao:before {
   content: "\e92f";
 }
-.icon_pastor_branco_suico:before {
+.icon_pastor_belga:before {
   content: "\e930";
 }
-.icon_pastor_de_shetland:before {
+.icon_pastor_boiadeiro:before {
   content: "\e931";
 }
-.icon_pastor_ingles_antigo:before {
+.icon_pastor_branco_suico:before {
   content: "\e932";
 }
-.icon_pequines:before {
+.icon_pastor_de_shetland:before {
   content: "\e933";
 }
-.icon_perdigueiro:before {
+.icon_pastor_ingles_antigo:before {
   content: "\e934";
 }
-.icon_pinscher:before {
+.icon_pequines:before {
   content: "\e935";
 }
-.icon_pitbull:before {
+.icon_perdigueiro:before {
   content: "\e936";
 }
-.icon_poodle:before {
+.icon_pinscher:before {
   content: "\e937";
 }
-.icon_pug:before {
+.icon_pitbull:before {
   content: "\e938";
 }
-.icon_rottweiler:before {
+.icon_poodle:before {
   content: "\e939";
 }
-.icon_samoieda:before {
+.icon_pug:before {
   content: "\e93a";
 }
-.icon_sao_bernardo:before {
+.icon_rottweiler:before {
   content: "\e93b";
 }
-.icon_schnauzer:before {
+.icon_samoieda:before {
   content: "\e93c";
 }
-.icon_scottish_terrier_1:before {
+.icon_sao_bernardo:before {
   content: "\e93d";
 }
-.icon_scottish_terrier:before {
+.icon_schnauzer:before {
   content: "\e93e";
 }
-.icon_setter_irlandes:before {
+.icon_scottish_terrier_1:before {
   content: "\e93f";
 }
-.icon_shar_pei:before {
+.icon_scottish_terrier:before {
   content: "\e940";
 }
-.icon_shiba_inu:before {
+.icon_setter_irlandes:before {
   content: "\e941";
 }
-.icon_shih_tzu:before {
+.icon_shar_pei:before {
   content: "\e942";
 }
-.icon_spitz_alemao:before {
+.icon_shiba_inu:before {
   content: "\e943";
 }
-.icon_spitz_japones:before {
+.icon_shih_tzu:before {
   content: "\e944";
 }
-.icon_staffordshire_bull_terrier:before {
+.icon_spitz_alemao:before {
   content: "\e945";
 }
-.icon_teckel:before {
+.icon_spitz_japones:before {
   content: "\e946";
 }
-.icon_terrier_brasileiro:before {
+.icon_srd:before {
   content: "\e947";
 }
-.icon_terrier_tibetano:before {
+.icon_staffordshire_bull_terrier:before {
   content: "\e948";
 }
-.icon_vizsla:before {
+.icon_teckel:before {
   content: "\e949";
 }
-.icon_weimaraner:before {
+.icon_terrier_brasileiro:before {
   content: "\e94a";
 }
-.icon_west_highland_terrier:before {
+.icon_terrier_tibetano:before {
   content: "\e94b";
 }
-.icon_whippet:before {
+.icon_vira-lata:before {
   content: "\e94c";
 }
-.icon_yorkshire:before {
+.icon_vizsla:before {
   content: "\e94d";
+}
+.icon_weimaraner:before {
+  content: "\e94e";
+}
+.icon_west_highland_terrier:before {
+  content: "\e94f";
+}
+.icon_whippet:before {
+  content: "\e950";
+}
+.icon_yorkshire:before {
+  content: "\e951";
 }
