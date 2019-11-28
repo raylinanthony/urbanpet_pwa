@@ -14,7 +14,7 @@ if (navigator.serviceWorker) {
     //navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
 }
 
-let swiper_breeds_name = '.breeds-container',
+var swiper_breeds_name = '.breeds-container',
     swiper_prods_name = '.prods-container',
 
     swiper_breeds_scrollbar = swiper_breeds_name + ' .swiper-scrollbar',
@@ -30,69 +30,95 @@ let swiper_breeds_name = '.breeds-container',
     _breedProdsSection = '.breed-products',
     _breedPropsSection = '.breed-properties',
     _breedSizesSection = '.sizes-section',
+    _titleBreedType = 'h1 .breed-type',
+    _titleBreedName =_breedProdsSection +' h1 .breed-name',
     sizeSwiper = {};
 
 /** JSON FILES **/
-const breedSizesJSON = 'data/breedSizes.json',
-    pwaConfig = loadJSON('data/pwa.json'),
-    //prodsShopify = 'http://urbanpet.do/p-roducts.json?limit=999';
-    prodsShopify = 'data/prods.json';
+const breedSizesJSON = 'data/breedSizes.json';
 
+var pwaConfigData;
 
+const pwaConfig = loadJSON('data/pwa.json').then(data =>{
+    pwaConfigData = data;
+    return data;
+});
 
+const prodsShopify = loadJSON('http://urbanpet.do/products.json?limit=999');
+//const prodsShopify = loadJSON('data/prods.json');
+ 
+
+/** Get products from shopify by certain parameters**/
 const getProdsByParams = (type, size, breed, data) => {
 
-    $('h1 .breed-type').text(type+' '+size);
-    $('.breed-products h1 .breed-name').text(breed);
-     
+    $(_titleBreedType).text(type + ' ' + size);
+    $(_titleBreedName).text(breed);
+
     return new Promise((resolve, reject) => {
 
         let products_data = [],
             liProd = '',
-            count = 0;
+            count = 0,
+            _wrapper = $(swiper_prods_name + ' .swiper-wrapper'),
+            _nofound  = $(_breedProdsSection + ' .no-found');
 
         Object.entries(data.products).map(val => {
 
             /** First I ask for the type */
 
             if (val[1].title.includes(type)) {
-
-                /** Some products doesn't have variants 
-                due that... I must double-check if exists variant. */
+               
+                    /** Some products doesn't have variants 
+                    due that... I must double-check if exists variant. */
 
                 if (val[1].hasOwnProperty('variants')) {
 
+                    console.log(val[1])
+
+                    if(val[1].variants.length == 0 || val[1].images.length == 0){
+                        _wrapper.empty();    
+                        _nofound.show();
+                        
+                            return;
+                        
+                    } 
+
+
+
+
+                    let prodImages = val[1].images[0].src;
+
+
+
                     val[1].variants.forEach((item) => {
 
-                        if (item.title == size && item.available === true) {
+                        if ((item.title == size && item.available === true) || size === '-') {
 
-                            /*products_data.push({
-                                title: val[1].title,
-                                size: item.title,
-                                price: calculatePrice(item.price),
-                                image: (item.featured_image != null) ? item.featured_image.src : '',
-                            });*/
+                            let img = prodImages;
 
-                            if (null === item.featured_image) return; //Only show if products have images.
+                            // Only works when products don't have variants images
+                            if (null !== item.featured_image) {
+                                img = item.featured_image.src;
+                            }
 
-                            const img = item.featured_image.src;
+                            _price = calculatePrice(item.price);
 
-                            liProd += `
-                            <div class="swiper-slide">
-                            <aside class="breed-prod">
-                            <div class="img">
-                            <img src="${img}" height="120" />
-                            </div>
-                            <h4 class="title">
-                            ${val[1].title}
-                            </h4>
-                            <div class="price">
-                            RD$ ${calculatePrice(item.price)}
-                            </div>
-                            </aside>
-                            </div>
+                                liProd += `
+                                <div class="swiper-slide">
+                                <aside class="breed-prod">
+                                <div class="img">
+                                <img src="${img}" width="120" />
+                                </div>
+                                <h4 class="title">
+                                ${val[1].title}
+                                </h4>
+                                <div class="price">
+                                RD$ ${_price}
+                                </div>
+                                </aside>
+                                </div>
 
-                            `;
+                            `; 
 
                         }
 
@@ -104,8 +130,13 @@ const getProdsByParams = (type, size, breed, data) => {
             }
         }); //end entries
 
+        if(liProd != ''){
+            _nofound.hide();
+             _wrapper.html(liProd);
+              
+        }
+       
 
-        $(swiper_prods_name + ' .swiper-wrapper').html(liProd)
         if (products_data) {
             return resolve(true);
         }
@@ -158,10 +189,7 @@ const swiperProds = () => {
         prodsSwiper = new Swiper(swiper_prods_name, {
             spaceBetween: 10,
             slidesPerView: 4,
-            speed: 6000,
-            freeModeMomentumRatio: 1,
-            freeMode: true,
-            freeModeFluid: true,
+            speed: 600,
             observer: true,
             observeParents: true,
         });
@@ -204,12 +232,28 @@ const getMatchBreeds = (breedslug, breedsize) => {
     return pwaConfig.then(data => {
 
         let _matchName = data.breeds_config.match_types[breedslug],
-            _matchSize = data.breeds_config.match_sizes[breedsize];
-        
+            _matchSize = data.breeds_config.match_sizes[breedsize],
+            _matchComodin, separator = '|';
 
-        if (_matchName != undefined){
+        if (_matchName.includes(separator)) {
 
-        } return [_matchName, _matchSize];
+            _split = _matchName.split(separator);
+            _matchName = _split[0];
+            _matchComodin = _split[1];
+
+        } else {
+            _matchComodin = _matchName;
+        }
+
+        if (_matchName != undefined) {
+
+            let obj = {
+                name: _matchName,
+                comodin: _matchComodin,
+                size: _matchSize
+            };
+            return obj;
+        }
 
     });
 };
@@ -226,14 +270,14 @@ const getBreedData = (_breed) => {
             var _sizeData = getMatchBreeds(size[0], size[1][1]);
 
 
-            _sizeData.then(val => {
+            _sizeData.then(obj => {
 
-                if (val[0] == undefined) return;
+                if (obj.name == undefined) return;
 
                 data_breeds += `
                     <li>
-                        <a href="#" data-breed="${_breed.name}" data-type="${val[0]}" data-size="${val[1]}"  class="trans-3" >
-                            <div class="txt">${val[0]}</div> <span class="size text-uppercase">${size[1][1]}</span>
+                        <a href="#" data-breed="${_breed.name}" data-comodin="${obj.comodin}" data-type="${obj.name}" data-size="${obj.size}"  class="trans-3" >
+                            <div class="txt">${obj.name}</div> <span class="size text-uppercase">${size[1][1]}</span>
                         </a>
                     </li>
                 `;
@@ -242,7 +286,7 @@ const getBreedData = (_breed) => {
         });
 
         setTimeout(() => {
-             
+
             $(_breedPropsSection + ' .breed-icon-wrap i').attr('class', _breed.icon);
             $(_breedPropsSection + ' h1 span').text(_breed.name);
             $(_breedPropsSection + ' .wrap-info ul').html(data_breeds);
@@ -256,7 +300,13 @@ const getBreedData = (_breed) => {
 }
 
 const calculatePrice = price => {
-    return (Math.floor(price) * Math.floor(53)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+ 
+        _dolar = Math.floor(pwaConfigData.config.dolar);
+        _calc = (Math.floor(price) * Math.floor(_dolar)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+ 
+    return _calc;
 };
 
 
@@ -402,17 +452,17 @@ $(function() {
 
         e.preventDefault();
 
-        var _currentType = $(this).attr('data-type'),
+        var _currentType = $(this).attr('data-comodin'),
             _currentSize = $(this).attr('data-size'),
-            _currentName = $(this).attr('data-breed') 
+            _currentName = $(this).attr('data-breed')
 
-             ;
+        ;
 
         showHideSection(_breedProdsSection, [_breedPropsSection]);
 
-        loadJSON(prodsShopify).then(data => {
+        prodsShopify.then(data => {
 
-            getProdsByParams(_currentType, _currentSize,_currentName, data).then(res => {
+            getProdsByParams(_currentType, _currentSize, _currentName, data).then(res => {
 
                 swiperProds();
             });

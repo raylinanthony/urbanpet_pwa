@@ -13,10 +13,10 @@
         _formStep2 = '.suscribe-step2',
         _wrapMenu = '.wrap-menu',
         maxPet = 3, //Number of pet that user can select
-        reviewsPane = '.reviews-pane',      
-        suscribePane = '.suscribe-pane',      
-          
-        newsletterPane = '.newsletter-pane',
+        reviewsPane = '.reviews-pane',
+        suscribePane = '.suscribe-pane',
+
+        reviewPane = '#review-section',
         thankyouPane = '.thankyou-pane',
         _config = '',
         _asideBreed = 'aside.breed',
@@ -32,34 +32,32 @@
 
     const registerUser = (user_data) => {
 
-        window.currentEmail = user_data.email;
+        let api_key = user_data.api_key;
 
-        var ident_data = {
-            '$email': user_data.email,
-            '$first_name': user_data.name.split(' ')[0],
-            '$last_name': user_data.name.split(' ').slice(1).join(' '),
-            'Género': user_data.gender,
-            'Tags': 'UrbanPetApp'
-        };
-        
-        $('.quest').each(function(e){
-            
-            ident_data['question-pregunta-'+e] =  $(this).find('.q-title').text();
-            ident_data['question-valoracion-'+e] =  $(this).find('.smile.active .smile-title').text();
- 
-        });
- 
-        console.info(ident_data)
-        window._learnq.push(['identify', ident_data]);
+        delete user_data.api_key;
+
+        window.currentEmail = user_data.$email;
+
+        if (user_data.segment == 'review') {
+            $('.quest').each(function(e) {
+
+                user_data['question-pregunta-' + e] = $(this).find('.q-title').text();
+                user_data['question-valoracion-' + e] = $(this).find('.smile.active .smile-title').text();
+
+            });
+        }
+
+
+
+        window._learnq.push(['identify', user_data]);
 
 
         /** Putting user in a list **/
         var profiles = {
-            api_key: user_data.api_key,
-            email: user_data.email,
+            api_key: api_key,
+            email: user_data.$email,
 
         };
-
 
 
         $.ajax({
@@ -67,7 +65,7 @@
             url: 'https://a.klaviyo.com/api/v1/list/' + user_data.list_id + '/members',
             data: profiles,
             success: function(response) {
-                console.log(response)            
+                console.log(response)
             }
         });
 
@@ -216,38 +214,42 @@
         $(_formStep2).on('submit', function() {
 
             var formClass = {
-                '$email': 'raylinaquino+3@gmail.com',
-                'Tags': 'UrbanPetApp'
+                '$email': window.currentEmail ,
+                'Tags Animals':'UrbanPetApp Pets'
             };
 
-            var types = $(this).find('[name="type[]"]'),
-                names = $(this).find('[name="petname[]"]'),
-                razas = $(this).find('[name="raza[]"]'),
-                births = $(this).find('[name="birth[]"]'),
-                genders = $(this).find('input:radio:checked');
+             pwaConfig.then(res => {
+                        var types = $(this).find('[name="type[]"]'),
+                            names = $(this).find('[name="petname[]"]'),
+                            razas = $(this).find('[name="raza[]"]'),
+                            births = $(this).find('[name="birth[]"]'),
+                            genders = $(this).find('input:radio:checked');
 
-            types.each(function(e) {
-                formClass['Pet Names ' + e] = names[e].value;
-                formClass['Pet Birth Month ' + e] = births[e].value;
-                formClass['Pet Breeds ' + e] = razas[e].value;
-                formClass['Pet Types ' + e] = $(this).val();
-                formClass['Pet Genders ' + e] = genders[e].value;
+                        types.each(function(e) {
+                            formClass['Pet Names ' + e] = names[e].value;
+                            formClass['Pet Birth Month ' + e] = births[e].value;
+                            formClass['Pet Breeds ' + e] = razas[e].value;
+                            formClass['Pet Types ' + e] = $(this).val();
+                            formClass['Pet Genders ' + e] = genders[e].value;
+                        });
+
+                        
+
+                        window._learnq.push(['identify', formClass]);
+                        showHideSection(thankyouPane, [suscribePane]);
+
+                        $(_wrapMenu+','+ _floor).hide();
             });
-          
-            window._learnq.push(['identify', formClass]);
-            showHideSection(thankyouPane, [suscribePane]);
-      
-            $(_wrapMenu, _floor).hide();
 
             return false;
         });
 
 
-        $(document).on('click', _addPet,function(e) {
+        $(document).on('click', _addPet, function(e) {
             e.preventDefault();
 
             var addPetWrap = $(_addPet),
-                petSet = $(_petSec); 
+                petSet = $(_petSec);
             if (petSet.length >= maxPet) {
 
                 addPetWrap.removeClass(activeClass);
@@ -277,32 +279,64 @@
 
         });
 
-          $(document).on('click', _petSec+'  .remove', function() {
-                $(this).closest(_petSec).remove();
-                return false;
-            });
+        $(document).on('click', _petSec + '  .remove', function() {
+            $(this).closest(_petSec).remove();
+            return false;
+        });
 
 
-        $('#newsletter-form').on('submit', function() {
+        $('#review-form, #newsletter-form').on('submit', function() {
 
             const name = $(this).find('[name="name"]').val(),
                 email = $(this).find('[name="email"]').val(),
-                gender = $(this).find('[name="gender"]').val();
-
+                gender = $(this).find('[name="gender"]:checked').val();
+           
             pwaConfig.then(res => {
 
-                registerUser({
-                    name: name,
-                    email: email,
-                    gender: gender,
+                let _obj = {
+                    '$first_name': name.split(' ')[0],
+                    '$last_name': name.split(' ').slice(1).join(' '),
+                    '$email': email,
+                    'Género': gender,
                     api_key: res.config.api_key_klaviyo,
                     list_id: res.config.list_id
 
-                });
+                }
+                if ($(this).attr('id') == 'newsletter-form') {
 
-                showHideSection(thankyouPane, [newsletterPane]);
-         
-                $(_wrapMenu, _floor).hide();
+                    _obj.segment = 'suscribe'; //Simply for undertand from where is sending;
+
+                    res.tags.suscribe.map((val, key) => {
+                        _obj['Tag ' + key] = val;
+
+                    })
+
+                } else {
+
+                    _obj.segment = 'review'; //Simply for undertand from where is sending;
+
+                    res.tags.review.map((val, key) => {
+                        _obj['Tag ' + key] = val;
+                    })
+
+                }
+
+
+                registerUser(_obj);
+
+                if ($(this).attr('id') == 'newsletter-form') {
+
+                    showHideSection(suscribePane, [reviewPane]);
+
+                } else {
+
+                    showHideSection(thankyouPane, [reviewPane]);
+                    $(_wrapMenu+','+ _floor).hide();
+
+                }
+
+
+
 
             });
 
@@ -320,7 +354,7 @@
             $(this).addClass(activeClass);
 
             pwaConfig.then((data) => {
-               
+
                 if ((quiz_swiper.realIndex + 1) < data.reviews.questions.length) {
                     quiz_swiper.slideNext();
                 }
@@ -349,8 +383,8 @@
 
             });
 
-            showHideSection(newsletterPane, [reviewsPane]);
-          
+            showHideSection(reviewPane, [reviewsPane]);
+
 
         });
 

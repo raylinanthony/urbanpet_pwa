@@ -13,7 +13,7 @@ body {
     font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.2;
-    background: #f0d7c5;
+    background: #f9d8c5;
     color: #212121;
     margin: 0;
     height: 100%;
@@ -69,8 +69,9 @@ body {
 .icon-bad:before {
     content: "\e906";
 }
-.btn-rounded{
-        width: 4.5rem;
+
+.btn-rounded {
+    width: 4.5rem;
     height: 4.5rem;
     display: inline-flex;
     background: #ffb71b;
@@ -80,12 +81,14 @@ body {
     font-size: 2rem;
     font-weight: bold;
     margin-right: 2rem;
-    border:0;
+    border: 0;
 }
-.btn-rounded:hover{
-  color: white;
+
+.btn-rounded:hover {
+    color: white;
     background: #8f1637;
 }
+
 .btn-one {
     padding: 1.5rem 6rem;
     display: inline-block;
@@ -150,7 +153,7 @@ main {
     position: absolute;
     bottom: 0;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
 }
 
 .wrap-sections {
@@ -159,6 +162,8 @@ main {
     height: 80%;
     overflow: auto;
     overflow-x: hidden;
+    background: url(../img/bg-cream.jpg) 0 0 no-repeat;
+    background-size: cover;
 }
 
 .btn-back {
@@ -185,19 +190,34 @@ main {
 
 /** Breed Products **/
 .breed-products {
-    text-align:center
+    text-align: center
 }
+
 .breed-products .wrap-products {
     background: #fff;
     position: absolute;
     width: 100%;
     bottom: 0;
     left: 0;
-    padding: 6rem 0 13rem;
+    padding: 6rem 4rem 13rem;
+    z-index: 1;
+}
+
+.breed-products .wrap-products .no-found {
+    font-weight: 600;
+    font-size: 2.5rem;
 }
 
 .breed-products .wrap-products .swiper-slide h4 {
     margin: 0 0 1rem;
+    min-height: 4rem;
+}
+
+.breed-products .wrap-products .swiper-slide .img {
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .breed-products .wrap-products .swiper-slide .price {
@@ -211,21 +231,28 @@ main {
 
 /** Breed Properties **/
 .breed-properties {
-    text-align:center
+    text-align: center;
+    position: relative;
+    z-index: 1;
 }
+
 .breed-properties .wrap-details {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5rem;
+    position: relative;
 }
 
 .breed-properties .wrap-details .wrap-pic {
     margin-right: 5rem;
+    position: relative;
 }
 
 .breed-properties .wrap-details .wrap-pic .breed-icon-wrap {
     width: 28rem;
     height: 28rem;
+    position: relative;
 }
 
 .breed-properties .wrap-details .wrap-pic .breed-icon-wrap i {
@@ -352,7 +379,7 @@ aside.breed:hover .breed-icon-wrap {
     color: #f0d7c5;
 }
 
-aside.breed:after {
+aside.breed:after, .breed-properties .wrap-details .wrap-pic .breed-icon-wrap:after {
     content: '';
     display: block;
     height: 1rem;
@@ -365,6 +392,11 @@ aside.breed:after {
     top: 20rem;
     filter: blur(1rem);
     border-radius: 50%;
+}
+
+.breed-properties .wrap-details .wrap-pic .breed-icon-wrap:after {
+    top: 100%;
+    width: 60%;
 }
 
 aside.breed .breed-name {
@@ -448,9 +480,11 @@ aside.breed .breed-name {
     display: flex;
     flex-wrap: wrap;
 }
-.suscribe-pane .form-group-radio .radio label{
-   width:4.5rem;
+
+.suscribe-pane .form-group-radio .radio label {
+    width: 4.5rem;
 }
+
 .suscribe-pane .form-wrap .form-group {
     flex: 1 45%;
     margin: 1rem 2%;
@@ -467,7 +501,6 @@ aside.breed .breed-name {
 }
 
 .suscribe-pane .add-pet i {
-   
     margin-right: 2rem;
 }
 
@@ -475,16 +508,18 @@ aside.breed .breed-name {
     margin-right: 2rem;
 }
 
- .suscribe-pane .add-pet:hover i {
+.suscribe-pane .add-pet:hover i {
     color: white;
     background: #8f1637;
 }
-.suscribe-pane .wrap-checks{
-       flex: 1 45%;
-       margin:0 1rem;
-       display: flex;
-       align-items: center;
+
+.suscribe-pane .wrap-checks {
+    flex: 1 45%;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
 }
+
 .suscribe-pane .wrap-btn {
     flex: 1 45%;
     width: 50%;
@@ -493,7 +528,7 @@ aside.breed .breed-name {
 
 .suscribe-pane .wrap-btn button.btn-one {
     display: block;
-    width:100%;
+    width: 100%;
 }
 
 .suscribe-pane .add-wrap {
@@ -625,6 +660,7 @@ aside.breed .breed-name {
     position: relative;
     width: 100%;
     bottom: 0;
+    z-index: 2;
 }
 
 .wrap-menu a {

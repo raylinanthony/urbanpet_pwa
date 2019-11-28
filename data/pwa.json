@@ -1,11 +1,20 @@
 {
   "config": {
     "currency_prefix":"RD$",
-    "dolar": "53",
-    "api_key_klaviyo": "pk_43d89feb16e4e8743a6dfdc080891e1b4a",
-    "list_id": "LKizJP"
+    "dolar": "53",     
+    "api_key_klaviyo": "pk_4da37b9d701605a4dbab9aaacf3e5ccf34",
+    "list_id": "M4igQX"
+  },
+  "tags":{
+    "review":[
+      "Galería 360", "Feedback Form"
+    ],
+    "suscribe":[
+      "Galería 360" 
+    ]
   },
   "reviews": {
+
     "smiles": {
       "excelent": {
         "icon": "icon-smile",
@@ -46,30 +55,30 @@
 
     },
     "match_types": {
-       "leash": "Correa",
-      "leash_ruff": "Ruff Leash",
-      "collar": "Collar", 
-      "stepin": "Arnés",
-      "meshplus": "Mesh Plus" 
-    },
-    "breeds": {
-      "animals": [
-        {
-          "type": "dog",
-          "name": "Chihuaha",
-          "img": "svg.jpg"
-        },
-        {
-          "type": "dog",
-          "name": "Chihuaha",
-          "img": "svg.jpg"
-        },
-        {
-          "type": "dog",
-          "name": "Chihuaha",
-          "img": "svg.jpg"
-        }
-      ]
-    }
+     "leash": "Correa",
+     "leash_ruff": "Ruff Leash",
+     "collar": "Collar", 
+     "stepin": "Arnés|Harness",
+     "meshplus": "Mesh Plus|Mesh" 
+   },
+   "breeds": {
+    "animals": [
+      {
+        "type": "dog",
+        "name": "Chihuaha",
+        "img": "svg.jpg"
+      },
+      {
+        "type": "dog",
+        "name": "Chihuaha",
+        "img": "svg.jpg"
+      },
+      {
+        "type": "dog",
+        "name": "Chihuaha",
+        "img": "svg.jpg"
+      }
+    ]
   }
+}
 }
