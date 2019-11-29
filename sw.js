@@ -1,18 +1,19 @@
 // imports
- 
 
 
-const CACHE_VERSION = 1.02;
+
+const CACHE_VERSION = 1.01;
 
 const STATIC_CACHE = 'cache-static-v' + CACHE_VERSION;
 const DYNA_CACHE = 'cache-dyna-v' + CACHE_VERSION;
 const INMU_CACHE = 'cache-inmut-v' + CACHE_VERSION;
-
+const arrCaches = [STATIC_CACHE, DYNA_CACHE, INMU_CACHE];
+const prodsShopify = 'https://urbanpet.do/products.json?limit=999';
 
 const APP_FILES = [
-	 
-	 './',
-	 './index.html',
+
+    './',
+    './index.html',
     './manifest.json',
     './sw.js',
     './assets/css/breeds.css',
@@ -52,43 +53,53 @@ const APP_FILES = [
     './assets/js/jquery.min.js',
     './assets/js/reviews.js',
     './assets/js/swiper.min.js',
-
     './data/breedSizes.json',
-    './data/prods.json',
     './data/pwa.json'
-
-//'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PBFhLu' 
-     
 ];
 
 const APP_INMU = [
- 
+
     'https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap',
-   'https://cdn.jsdelivr.net/npm/pouchdb@7.1.1/dist/pouchdb.min.js',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/prisma-2_h_harness_01575ee8-f1a4-459f-9c67-c89d384100bf.png?v=1562785897',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/prisma-2_collar.png?v=1562785795',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/milky_collar_2_c9fcd0c9-0269-4f37-a8fd-53828128345b.png?v=1562783535',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/florida-2_collar.png?v=1562783249',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/ella_2_h_harness_7ea175e2-7aa7-48e8-96c4-857c01c4ef9c.png?v=1562782846',
-   'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/atlanta-2_collar_1.png?v=1563504854',
-  'https://cdn.shopify.com/s/files/1/0081/6096/8759/products/Collar_Green_1.png?v=1562774798'
+    prodsShopify
 
 ];
 
 self.addEventListener('install', e => {
 
-    /** Creating Cache **/
-    const cacheStatic = caches.open(STATIC_CACHE).then(cache => {
+    let _gettingData = fetch('https://urbanpet.do/products.json?limit=999').then(data => {
+
+        return data.json();
+
+    }).then(res => {
+
+        res.products.map((val, key) => {
+
+            if (val.images.length > 0) {
+
+                val.images.map(img => {
+
+                    APP_INMU.push(img.src);
+
+                });
+
+            }
+
+        })
+
+        /** Creating Cache **/
+        const cacheStatic = caches.open(STATIC_CACHE).then(cache => {
             return cache.addAll(APP_FILES)
         });
 
-    const cacheInmu = caches.open(INMU_CACHE).then(cache => {
+        const cacheInmu = caches.open(INMU_CACHE).then(cache => {
             return cache.addAll(APP_INMU)
-        }
-    );
- 
+        });
 
-    e.waitUntil(Promise.all([cacheStatic, cacheInmu]));
+        e.waitUntil(Promise.all([cacheStatic, cacheInmu]));
+    })
+
+
+    e.waitUntil(Promise.all([_gettingData]));
 
 });
 
@@ -101,33 +112,42 @@ self.addEventListener('fetch', e => {
         }
 
         // If some files don't exit in the cache then add them
-        console.log('No existe', e.request.url)
 
-        var corsRequest = new Request(e.request.url, {mode: 'cors'});
- 
-           return fetch(corsRequest).then(newResp => {
-                caches.open(DYNA_CACHE).then(cache =>
-                    cache.put(e.request, newResp)
-                );
-                return newResp;
-            }) ;
+
+        var corsRequest = new Request(e.request.url, {
+            mode: 'cors'
+        });
+
+        return fetch(corsRequest).then(newResp => {
+        
+            caches.open(DYNA_CACHE).then(cache =>
+                cache.put(e.request, newResp.clone())
+            );
+        
+            return newResp;
+        
+        });
+
     }); // end response
 
     e.respondWith(response);
 });
 
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName.startsWith('pages-cache-') && staticCacheName !== cacheName) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+self.addEventListener('activate', e => {
+
+    const cacheDel =  caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    console.log(cacheName, arrCaches.indexOf(cacheName))
+                    if (arrCaches.indexOf(cacheName) === -1 ) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        });
+
+    e.waitUntil(cacheDel);
+
 });
 
 

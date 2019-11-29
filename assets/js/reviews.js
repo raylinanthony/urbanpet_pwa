@@ -1,21 +1,21 @@
 ;
 (function($) {
 
-    var proxyurl = "https://cors-anywhere.herokuapp.com/",
-        quiz_container = '.quiz-container',
-        quiz_swiper,
-        _addPet = '.suscribe-pane .add-pet',
-        smileBox = '.reviews-pane .smiles .smile',
-        _menu = ' .wrap-menu a',
-        _btnBack = '.btn-back ',
-        activeClass = 'active',
-        _petSec = '.pet-sec',
-        _formStep2 = '.suscribe-step2',
-        _wrapMenu = '.wrap-menu',
+    var 
+    quiz_container = '.quiz-container',
+    quiz_swiper,
+    _addPet = '.suscribe-pane .add-pet',
+    smileBox = '.reviews-pane .smiles .smile',
+    _menu = ' .wrap-menu a',
+    _btnBack = '.btn-back ',
+    activeClass = 'active',
+    _petSec = '.pet-sec',
+    _formStep2 = '.suscribe-step2',
+    _wrapMenu = '.wrap-menu',
         maxPet = 3, //Number of pet that user can select
         reviewsPane = '.reviews-pane',
         suscribePane = '.suscribe-pane',
-
+        _proxy = 'https://cors-anywhere.herokuapp.com/',
         reviewPane = '#review-section',
         thankyouPane = '.thankyou-pane',
         _config = '',
@@ -26,63 +26,55 @@
         cats = 'Abyssinian,Aegean Cat,American Bobtail,American Curl,American Shorthair,American Wirehair,Balinese,Bengal,Birman,Bombay,British Shorthair,Burmese,Burmilla,Chartreux,Cornish Rex,Cymric,Devon Rex,Egyptian Mau,Exotic Shorthair,Havana Brown,Himalayan,Japanese Bobtail,Javanese,Korat,Kurilian Bobtail,LaPerm,Li Hua,Maine Coon,Manx,Munchkin,Norwegian Forest Cat,Ocicat,Oriental,Persian,Pixiebob,Ragamuffin,Ragdoll,Russian Blue,Savannah,Scottish Fold,Selkirk Rex,Siamese,Siberian,Singapura,Somali,Sphynx,Tonkinese,Toyger,Turkish Angora,Turkish Van';
 
 
-    /** JSON FILES **/
-    pwaConfig = pwaLoadData('data/pwa.json');
+        /** JSON FILES **/
+        pwaConfig = pwaLoadData('data/pwa.json');
 
 
-    const registerUser = (user_data) => {
+        const registerUser = (user_data) => {
 
-        let api_key = user_data.api_key;
+            let api_key = user_data.api_key;
 
-        delete user_data.api_key;
+            delete user_data.api_key;
 
-        window.currentEmail = user_data.$email;
+            window.currentEmail = user_data.$email;
 
-        if (user_data.segment == 'review') {
-            $('.quest').each(function(e) {
+            if (user_data.segment == 'review') {
+                $('.quest').each(function(e) {
 
-                user_data['question-pregunta-' + e] = $(this).find('.q-title').text();
-                user_data['question-valoracion-' + e] = $(this).find('.smile.active .smile-title').text();
+                    user_data['question-pregunta-' + e] = $(this).find('.q-title').text();
+                    user_data['question-valoracion-' + e] = $(this).find('.smile.active .smile-title').text();
 
-            });
-        }
-
-
-
-        window._learnq.push(['identify', user_data]);
-
-
-        /** Putting user in a list **/
-        var profiles = {
-            api_key: api_key,
-            email: user_data.$email,
-
-        };
-
-
-        $.ajax({
-            type: "POST",
-            url: 'https://a.klaviyo.com/api/v1/list/' + user_data.list_id + '/members',
-            data: profiles,
-            success: function(response) {
-                console.log(response)
+                });
             }
-        });
 
-        // fetch('https://a.klaviyo.com/api/v1/list/' + user_data.list_id + '/members', {
 
-        //     method: "post",  
-        //     body:  profiles , // data can be `string` or {object}!
-        //      headers:{
-        //         'Content-Type': 'application/json',
-        //         api_key: user_data.api_key,
-        //         'origin': 'x-requested-with'
-        //       } , 
-        //     mode: 'cors',
-        //     cache: 'default'
 
-        // }).then(console.log).catch(e => console.log('ERROR ', e)) 
+            window._learnq.push(['identify', user_data]);
 
+
+            /** Putting user in a list **/
+            var profiles = {
+                api_key: api_key,
+                profiles:[{
+                    email: user_data.$email
+                }]
+
+            };
+
+            console.log( 'HEAD Access-Control-Allow-Origin'+Math.random())
+
+
+            fetch(_proxy+'https://a.klaviyo.com/api/v2/list/' + user_data.list_id + '/members', {
+                method: 'POST',
+                mode: 'cors', 
+                body:JSON.stringify(profiles), 
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'*'
+                } 
+            })
+            .then(console.log)
+ 
     }
 
 
@@ -96,34 +88,34 @@
                 pwaConfig.then((data) => {
 
                     let reviews = data.reviews,
-                        questionsObj, htmlSmiles = '',
-                        htmlQuestions = '',
-                        totalReviews = '<span class="num">1</span> de ' + data.reviews.questions.length;
+                    questionsObj, htmlSmiles = '',
+                    htmlQuestions = '',
+                    totalReviews = '<span class="num">1</span> de ' + data.reviews.questions.length;
 
                     Object.entries(data.reviews.smiles).map(res => {
 
                         htmlSmiles += `
-                            <aside class="smile">
-                            <i class="${res[1].icon}"></i>
-                            <div class="smile-title">${res[1].title}</div>
-                            <div class="smile-desc">${res[1].desc}</div>
-                            </aside> 
-                            `;
+                        <aside class="smile">
+                        <i class="${res[1].icon}"></i>
+                        <div class="smile-title">${res[1].title}</div>
+                        <div class="smile-desc">${res[1].desc}</div>
+                        </aside> 
+                        `;
                     });
 
                     Object.entries(data.reviews.questions).map(res => {
 
                         htmlQuestions += `
-                            <div class="swiper-slide">
-                            <div class="quest">
-                            <div class="q-title">${res[1].title}</div>
-                            <div class="smiles">
-                            ${htmlSmiles} 
-                            </div>
-                            </div> 
-                            </div> 
+                        <div class="swiper-slide">
+                        <div class="quest">
+                        <div class="q-title">${res[1].title}</div>
+                        <div class="smiles">
+                        ${htmlSmiles} 
+                        </div>
+                        </div> 
+                        </div> 
 
-                            `;
+                        `;
                     });
                     $(quiz_container + ' .swiper-wrapper').html(htmlQuestions);
 
@@ -193,7 +185,7 @@
         }
 
         var opts = ['<option value="">Elige una raza</option>'],
-            _select = $('#petSelect');
+        _select = $('#petSelect');
 
 
         breeds.forEach(function(pet) {
@@ -218,27 +210,27 @@
                 'Tags Animals':'UrbanPetApp Pets'
             };
 
-             pwaConfig.then(res => {
-                        var types = $(this).find('[name="type[]"]'),
-                            names = $(this).find('[name="petname[]"]'),
-                            razas = $(this).find('[name="raza[]"]'),
-                            births = $(this).find('[name="birth[]"]'),
-                            genders = $(this).find('input:radio:checked');
+            pwaConfig.then(res => {
+                var types = $(this).find('[name="type[]"]'),
+                names = $(this).find('[name="petname[]"]'),
+                razas = $(this).find('[name="raza[]"]'),
+                births = $(this).find('[name="birth[]"]'),
+                genders = $(this).find('input:radio:checked');
 
-                        types.each(function(e) {
-                            formClass['Pet Names ' + e] = names[e].value;
-                            formClass['Pet Birth Month ' + e] = births[e].value;
-                            formClass['Pet Breeds ' + e] = razas[e].value;
-                            formClass['Pet Types ' + e] = $(this).val();
-                            formClass['Pet Genders ' + e] = genders[e].value;
-                        });
+                types.each(function(e) {
+                    formClass['Pet Names ' + e] = names[e].value;
+                    formClass['Pet Birth Month ' + e] = births[e].value;
+                    formClass['Pet Breeds ' + e] = razas[e].value;
+                    formClass['Pet Types ' + e] = $(this).val();
+                    formClass['Pet Genders ' + e] = genders[e].value;
+                });
 
-                        
 
-                        window._learnq.push(['identify', formClass]);
-                        showHideSection(thankyouPane, [suscribePane]);
 
-                        $(_wrapMenu+','+ _floor).hide();
+                window._learnq.push(['identify', formClass]);
+                showHideSection(thankyouPane, [suscribePane]);
+
+                $(_wrapMenu+','+ _floor).hide();
             });
 
             return false;
@@ -249,7 +241,7 @@
             e.preventDefault();
 
             var addPetWrap = $(_addPet),
-                petSet = $(_petSec);
+            petSet = $(_petSec);
             if (petSet.length >= maxPet) {
 
                 addPetWrap.removeClass(activeClass);
@@ -260,7 +252,7 @@
                 petSet.removeClass('last');
 
                 var lastPet = petSet.last(),
-                    lastPetClone = lastPet.clone();
+                lastPetClone = lastPet.clone();
 
                 lastPetClone.find('input[type=text], select').val('').end();
                 lastPetClone.find('.raza').val('').end();
@@ -288,9 +280,9 @@
         $('#review-form, #newsletter-form').on('submit', function() {
 
             const name = $(this).find('[name="name"]').val(),
-                email = $(this).find('[name="email"]').val(),
-                gender = $(this).find('[name="gender"]:checked').val();
-           
+            email = $(this).find('[name="email"]').val(),
+            gender = $(this).find('[name="gender"]:checked').val();
+
             pwaConfig.then(res => {
 
                 let _obj = {
@@ -374,7 +366,7 @@
             $(quiz_container + ' .swiper-slide').each(function() {
 
                 let puntuaction = $(this).find('.smiles .smile.active .smile-title').text(),
-                    title = $(this).find('.q-title').text();
+                title = $(this).find('.q-title').text();
 
                 dataQuiz.push({
                     title: title,

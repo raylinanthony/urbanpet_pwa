@@ -131,7 +131,7 @@ main {
     max-width: 102.4rem;
     margin: 0 auto;
     height: 100%;
-    max-height: 66rem;
+    max-height: 76.8rem;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -149,7 +149,7 @@ main {
 .floor {
     background: #dbc2af;
     width: 1000%;
-    height: 17rem;
+    height: 23rem;
     position: absolute;
     bottom: 0;
     pointer-events: none;
@@ -301,7 +301,7 @@ main {
 }
 
 h1 {
-    font-size: 4.2rem;
+    font-size: 5.8rem;
     font-weight: 800;
     margin: 2rem 0;
     line-height: 1;
@@ -335,7 +335,7 @@ h1 {
 
 .sizes-wrap .swiper-list {
     position: relative;
-    margin-top: 2rem;
+    margin-top: 5rem;
 }
 
 .sizes-wrap .swiper-list .swiper-wrapper {
@@ -458,6 +458,7 @@ aside.breed .breed-name {
 
 .newsletter-pane h1 {
     font-size: 5rem;
+    margin: 5rem 0;
 }
 
 .newsletter-pane .form-wrap {
@@ -552,8 +553,8 @@ aside.breed .breed-name {
 }
 
 .reviews-pane .questions .q-title {
-    margin: 2rem auto;
-    font-size: 2.6rem;
+    margin: 3rem auto;
+    font-size: 3rem;
     font-weight: bold;
     max-width: 70%;
 }

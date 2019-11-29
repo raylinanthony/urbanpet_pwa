@@ -80,7 +80,7 @@ self.addEventListener('fetch', e => {
     if(res){
         return res;
     }
-    console.log(e.resquest.url);
+    
   })  
 
   e.respondWith(response);

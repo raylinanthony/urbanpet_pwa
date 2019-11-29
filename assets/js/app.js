@@ -4,15 +4,16 @@
 @date Nov 22, 2019
 **/
 
+//console.log('_learnq', _learnq)
+//if(_learnq) window._learnq = _learnq;
 
-
-///window._learnq = _learnq;
 
 /** Registering SW*/
 
 if (navigator.serviceWorker) {
-    //navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
+    navigator.serviceWorker.register('./sw.js').then(()=> { console.log("Service Worker Registered"); })
 }
+ 
 
 var swiper_breeds_name = '.breeds-container',
     swiper_prods_name = '.prods-container',
@@ -44,7 +45,7 @@ const pwaConfig = loadJSON('data/pwa.json').then(data =>{
     return data;
 });
 
-const prodsShopify = loadJSON('http://urbanpet.do/products.json?limit=999');
+const prodsShopify = loadJSON('https://urbanpet.do/products.json?limit=999');
 //const prodsShopify = loadJSON('data/prods.json');
  
 
